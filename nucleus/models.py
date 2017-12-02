@@ -8,6 +8,7 @@ class Incident(models.Model):
   description = models.TextField()
   image = models.ImageField(upload_to='incidents/')
   reported = models.BooleanField(default=False)
+  ministry = models.CharField(max_length=1024, default="")
 
 RESPONSE_CHOICES = (
   (1,'Yes'),
