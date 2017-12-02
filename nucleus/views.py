@@ -4,6 +4,7 @@ from rest_framework import viewsets, generics
 from django.conf import settings
 from rest_framework.response import Response
 
+from .function import getMinistry
 from .serializers import *
 from .models import *
 
@@ -38,8 +39,10 @@ class VerifyView(generics.ListCreateAPIView):
         return Response({"message":"Already Repored"})
     if(response==1 and incident.verify.filter(response=1).count()-incident.verify.filter(response=2).count()>=2):
         incident.reported = True
+        ministry = getMinistry(incident.description)
+        incident.ministry = ministry
         incident.save()
-        print('Incident reported'+incident.id)
+        print('Incident reported - '+str(incident.id)+' description: '+incident.description+' to ministry: '+incident.ministry)
     if(response==1):
         response = "Yes"
     elif(response==2):

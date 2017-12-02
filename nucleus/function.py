@@ -1,8 +1,13 @@
 import operator
 import json
 
+keywords = {
+"Ministry of Home Affairs" : ["unidentified","object"],
+"Ministry of Railways" : ["track","broken"],
+"Ministry of Tourism" : ["monument"]
+}
+
 def getMinistry(description):
-	keywords = json.loads(open('keywords').read())
 	m = {}
 	ct = {}
 	for ministry in keywords:
