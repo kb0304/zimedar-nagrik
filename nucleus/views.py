@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import viewsets, generics
 from django.conf import settings
+from rest_framework.response import Response
 
-from .serializers import IncidentSerializer
+from .serializers import *
 from .models import *
 
 # Create your views here.
@@ -19,3 +20,30 @@ class IncidentView(generics.ListCreateAPIView):
         return Incident.objects.all()    
     return Incident.objects.all()
   serializer_class = IncidentSerializer
+
+class VerifyView(generics.ListCreateAPIView):
+  queryset = Verify.objects.all()
+  serializer_class = VerifySerializer
+
+  def create(self, request, *args, **kwargs):
+    incidentId = request.data.get('incident','')
+    response = request.data.get('response','')
+    try:
+      incident = Incident.objects.get(id=incidentId)
+    except Exception as e:
+      return Response({"message":"Incident not valid"})
+    if(response not in [1,2,3]):
+      return Response({"message":"Response code not valid"})
+    if(incident.reported):
+        return Response({"message":"Already Repored"})
+    if(response==1 and incident.verify.filter(response=1).count()-incident.verify.filter(response=2).count()>=2):
+        incident.reported = True
+        incident.save()
+        print('Incident reported'+incident.id)
+    if(response==1):
+        response = "Yes"
+    elif(response==2):
+        response = "No"
+    else:
+        resonse = "Not Sure"
+    return super(VerifyView, self).create(request, *args, **kwargs)
