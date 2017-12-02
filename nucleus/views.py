@@ -50,3 +50,6 @@ class VerifyView(generics.ListCreateAPIView):
     else:
         resonse = "Not Sure"
     return super(VerifyView, self).create(request, *args, **kwargs)
+
+def index(request):
+    return render(request, 'index.html', {})

@@ -19,6 +19,7 @@ from django.conf.urls import include
 from .views import *
 
 urlpatterns = [
+  url(r'^$', index, name='index'),
   url(r'^report/$',IncidentView.as_view(), name='report'),
   url(r'^verify/$', VerifyView.as_view(), name='verify'),
 ]
