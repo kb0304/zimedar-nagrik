@@ -121,3 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760
 STATIC_URL = '/static/'
+
+# 1 lat = 110.567
+LAT_FACTOR = 0.002
+# approx 220m
