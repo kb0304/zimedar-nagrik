@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'nucleus.middlewares.LogMiddleware',
 ]
 
 ROOT_URLCONF = 'zimedar_nagrik.urls'
@@ -118,5 +119,5 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
-
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760
 STATIC_URL = '/static/'

@@ -12,3 +12,4 @@ class IncidentView(generics.ListCreateAPIView):
 
 def get_nearby(lat, lng):
   return Incident.objects.filter(lat__gte=lat-0.0001, lat__sme=lat+0.0001, lng__gte=lng-0.0001, lng__sme=lng+0.0001)
+
