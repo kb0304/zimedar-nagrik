@@ -28,4 +28,4 @@ Setup
 2. Create a virtualenv ```pip -p python3 <virtualenv>```
 3. Install the dependencies ```pip install -r requirements```
 4. Make migrations and migrate ```python manage.py makemigrations``` and ```python manage.py migrate```
-5. Run server ```python manage.py runserver``
+5. Run server ```python manage.py runserver```
